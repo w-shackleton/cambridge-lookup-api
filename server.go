@@ -56,10 +56,16 @@ func UpdateConfigurationPage(w http.ResponseWriter, r *http.Request, _ httproute
 }
 
 func GetPerson(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	ctx := appengine.NewContext(r)
 	crsid := params.ByName("crsid")
 
-	// TODO: use RAM cache (could fit every single entry into RAM easily)
+	val, ok := getFromCache(crsid)
+
+	if ok {
+		fmt.Fprint(w, val)
+		return
+	}
+
+	ctx := appengine.NewContext(r)
 
 	// check if this person is in the datastore
 	k := datastore.NewKey(ctx, "Person", crsid, 0, nil)
@@ -90,6 +96,8 @@ func GetPerson(w http.ResponseWriter, r *http.Request, params httprouter.Params)
 		datastore.Put(ctx, k, person)
 
 	}
+
+	putInCache(crsid, person.String())
 
 	fmt.Fprint(w, person)
 }
