@@ -9,8 +9,7 @@ handlers:
   script: _go_app
 - url: /.*
   script: _go_app
-  http_headers:
-    Access-Control-Allow-Origin: *
+
 
 automatic_scaling:
   min_idle_instances: 0
