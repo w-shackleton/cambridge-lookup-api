@@ -11,6 +11,7 @@ import (
 
 var config map[string]string
 var configSync sync.Mutex
+var configSetup sync.Once
 
 type Config struct {
 	Value       string
@@ -20,6 +21,10 @@ type Config struct {
 func getConfig(ctx appengine.Context, key string) (string, error) {
 	configSync.Lock()
 	defer configSync.Unlock()
+
+	configSetup.Do(func() {
+		config = make(map[string]string)
+	})
 
 	// grab the config
 	val, ok := config[key]
@@ -36,6 +41,8 @@ func getConfig(ctx appengine.Context, key string) (string, error) {
 	if err := datastore.Get(ctx, k, conf); err != nil {
 		return "", errors.New("Config does not exist")
 	}
+
+	config[key] = conf.Value
 
 	return conf.Value, nil
 }
