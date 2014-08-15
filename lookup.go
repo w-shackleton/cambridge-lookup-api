@@ -126,7 +126,7 @@ func getPerson(ctx appengine.Context, crsid string, sess string) (*Person, error
 		value := s.Find("td").First().Next().Text()
 
 		// format the values properly
-		reg, _ := regexp.Compile(`\s*Value:\s+(.*)\s+Visibility.*`)
+		reg, _ := regexp.Compile(`\s*Value:\s+(.*)\s+(Visibility)?.*`)
 
 		match := reg.FindStringSubmatch(value)
 
