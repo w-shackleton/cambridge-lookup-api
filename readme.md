@@ -1,7 +1,8 @@
 # Cambridge Lookup API
 
-A simple API for retrieving information about University of Cambridge Students.
+A simple API for retrieving information from lookup from outside CUDN.
 
+This project is used internally for may ball and Robinson College Boat Club and is governed by their respective privacy policies.
 
 # Usage
 
