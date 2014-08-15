@@ -22,7 +22,7 @@ var ramCacheSync sync.Mutex
 
 func init() {
 	router := httprouter.New()
-	router.GET("/api/people/:crsid", GetPerson)
+	router.GET("/api/people/:crsid", BasicAuth(GetPerson))
 	router.GET("/", Home)
 	router.GET("/configure", UpdateConfigurationPage)
 	router.POST("/configure", UpdateConfiguration)
