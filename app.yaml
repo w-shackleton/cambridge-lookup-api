@@ -4,6 +4,9 @@ runtime: go
 api_version: go1
 
 handlers:
+- url: /mu-84c1db53-b95e408f-a1aa8605-55acbf1b.txt
+  static_files: mu-84c1db53-b95e408f-a1aa8605-55acbf1b.txt
+  upload: mu-84c1db53-b95e408f-a1aa8605-55acbf1b.txt
 - url: /configure
   login: admin
   script: _go_app
