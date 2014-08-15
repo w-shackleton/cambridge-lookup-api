@@ -9,3 +9,12 @@ handlers:
   script: _go_app
 - url: /.*
   script: _go_app
+  http_headers:
+    Access-Control-Allow-Origin: *
+
+automatic_scaling:
+  min_idle_instances: 0
+  max_idle_instances: automatic  # default value
+  min_pending_latency: automatic  # default value
+  max_pending_latency: 5000ms
+  max_concurrent_requests: 500
