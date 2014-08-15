@@ -37,7 +37,9 @@ func BasicAuth(pass httprouter.Handle) httprouter.Handle {
 		pair := strings.SplitN(string(payload), ":", 2)
 
 		if len(pair) != 2 || !Validate(ctx, pair[0], pair[1]) {
-			http.Error(w, "authorization failed", http.StatusUnauthorized)
+			w.Header().Set("WWW-Authenticate", `Basic realm="Cambridge Lookup API"`)
+			w.WriteHeader(401)
+			w.Write([]byte("401 Unauthorized\n"))
 			return
 		}
 
