@@ -11,15 +11,6 @@ import (
 	"appengine/datastore"
 )
 
-/*
-var ramCache string
-var ramCacheSync sync.Mutex
-*/
-
-/*
-	Server handlers
-*/
-
 func init() {
 	router := httprouter.New()
 	router.GET("/api/people/:crsid", BasicAuth(GetPerson))
